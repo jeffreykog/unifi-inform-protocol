@@ -51,4 +51,22 @@ If the UAP is on the same L2 network as the controller and you click `Adopt` in 
 Now the UAP knows the encryption key and will use it to connect to the controller
 
 # Inform protocol spec
+An inform packet is an http POST request to the `/inform` url. It is a binary packet. The format is as follows:
+ * 4 bytes: Magic header. Always `TNBU` (`UBNT` reversed)
+ * 4 bytes: Not sure. Seems to be 0 always
+ * 6 bytes: AP mac address
+ * 2 bytes: Flags
+   * 0x01: Encrypted
+   * 0x02: Compressed
+ * 16 bytes: Initialization Vector (IV) for encryption
+ * 4 bytes: Always 1. Some kind of protocol version?
+ * 4 bytes: Payload length `l`
+ * `l` bytes: Payload
+
+The encryption of the payload is aes-128-cbc, without padding.
+The encryption key is the key sent to the UAP while adopting it (see Adoption Process section).
+
+When encrypted, you see some json data. What all these values mean should be pretty clear.
+
+# Configuring an UAP
 Coming soon
