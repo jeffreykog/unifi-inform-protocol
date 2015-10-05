@@ -65,8 +65,9 @@ An inform packet is an http POST request to the `/inform` url. It is a binary pa
 
 The encryption of the payload is aes-128-cbc, without padding.
 The encryption key is the key sent to the UAP while adopting it (see Adoption Process section).
+If the UAP is already adopted, you can find the encryption key in the `cfg/mgmt` file in the default ssh folder on the UAP. See the `mgmt.authkey` line for the encryption key.
 
-When encrypted, you see some json data. What all these values mean should be pretty clear.
+When decrypted, you see some json data. What all these values mean should be pretty clear.
 
 # Configuring an UAP
 Coming soon
