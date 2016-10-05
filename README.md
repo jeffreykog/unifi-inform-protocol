@@ -53,13 +53,13 @@ Now the UAP knows the encryption key and will use it to connect to the controlle
 # Inform protocol spec
 An inform packet is an http POST request to the `/inform` url. It is a binary packet. The format is as follows:
  * 4 bytes: Magic header. Always `TNBU` (`UBNT` reversed)
- * 4 bytes: Not sure. Seems to be 0 always
+ * 4 bytes: Packet version (Currently always 0)
  * 6 bytes: AP mac address
  * 2 bytes: Flags
    * 0x01: Encrypted
    * 0x02: Compressed
  * 16 bytes: Initialization Vector (IV) for encryption
- * 4 bytes: Always 1. Some kind of protocol version?
+ * 4 bytes: Data Version
  * 4 bytes: Payload length `l`
  * `l` bytes: Payload
 
