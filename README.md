@@ -58,12 +58,14 @@ An inform packet is an http POST request to the `/inform` url. It is a binary pa
  * 2 bytes: Flags
    * 0x01: Encrypted
    * 0x02: Compressed
+   * 0x04: Use snappy compression (not 100% sure)
+   * 0x08: Use AES-GCM encryption instead of AES-CBC
  * 16 bytes: Initialization Vector (IV) for encryption
  * 4 bytes: Data Version
  * 4 bytes: Payload length `l`
  * `l` bytes: Payload
 
-The encryption of the payload is aes-128-cbc, without padding.
+The encryption of the payload is unpadded AES-128-CBC, or AES-GCM in newer firmwares (see flags above).
 The encryption key is the key sent to the UAP while adopting it (see Adoption Process section).
 If the UAP is already adopted, you can find the encryption key in the `cfg/mgmt` file in the default ssh folder on the UAP. See the `mgmt.authkey` line for the encryption key.
 
